@@ -1,0 +1,19 @@
+dm<-read.xlsx("C:/Users/anadi/OneDrive/Desktop/ship.xlsx")
+dim(dm)
+head(dm)
+dm$TAT<- as.factor(dm$TAT)
+str(dm)
+set.seed(24)
+s<- sample(1000,700) 
+train<- dm[s,]
+test <- dm[-s,]
+dim(train)
+logres<- glm(train$TAT~.,data = train, family= binomial())
+summary(logres)
+p<-predict(logres,test,type="response")
+p
+p1<-ifelse(p>=.50,1,0)
+p1
+t<- table(test$TAT,p1)
+t
+sum(diag(t))/sum(t)
