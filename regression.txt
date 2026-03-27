@@ -1,0 +1,19 @@
+dm<-read.xlsx("C:/Users/anadi/OneDrive/Desktop/ship.xlsx")
+dim(dm)
+head(dm)
+reg<-lm(dm$Turnaround_Time_hrs~.,data = dm)
+summary(reg)
+set.seed(24)
+s<- sample(1000,700)
+train<- dm[s,]
+test<-dm[-s,]
+dim(train)
+reg<- lm(train$Turnaround_Time_hrs~.,data = train)
+p<-predict(reg,test)
+p
+mae_reg<- function(actual,predicted)(mean(abs(actual-predicted)))
+mae_reg(test$Turnaround_Time_hrs,p)
+mean<-mean(test$Turnaround_Time_hrs)
+mean
+mae_base<- function(actual,mean)(mean(abs(actual-mean)))
+mae_base(test$Turnaround_Time_hrs,mean)
