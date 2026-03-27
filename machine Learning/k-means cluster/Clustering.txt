@@ -1,0 +1,51 @@
+m<-read.xlsx("C:/Users/anadi/OneDrive/Desktop/mentor.xlsx")
+dim(m)
+head(m)
+#For compentancy
+m1<- m[,-c(1,7,8,9,10)]
+head(m1)
+set.seed(10)
+res<- kmeans(m1,5)
+res$centers
+res$size
+res$cluster
+m2<- data.frame(m,res$cluster)
+head(m2)
+#for style
+m3<-m[,-c(1,2,3,4,5,6)]
+head(m3)
+set.seed(10)
+res2<- kmeans(m3,2)
+res2$centers
+res2$size
+res2$cluster
+m4<-data.frame(m2,res2$cluster)
+head(m4)
+write.xlsx(m4,"C:/Users/anadi/OneDrive/Desktop/mydata.xlsx")
+
+#write.xlsx(m4,file = "mentordata.xlsx")
+#-------------------------------------------------------------#
+#Now for mentee
+# j<-read.xlsx("C:/Users/anadi/OneDrive/Desktop/mentee.xlsx")
+# dim(j)
+# head(j)
+# #For compentancy
+# j1<- j[,-c(1,7,8,9,10)]
+# head(j1)
+# set.seed(10)
+# res<- kmeans(j1,2)
+# res$centers
+# res$size
+# res$cluster
+# j2<- data.frame(j,res$cluster)
+# head(j2)
+# #For style
+# j3<-j[,-c(1,2,3,4,5,6)]
+# head(j3)
+# set.seed(10)
+# res2<- kmeans(j3,2)
+# res2$centers
+# res2$size
+# res2$cluster
+# j4<-data.frame(j2,res2$cluster)
+# head(j4)
