@@ -1,0 +1,42 @@
+=#how to import the file in R
+c<-read.xlsx("C:/Users/anadi/OneDrive/Desktop/Consumer_data.xlsx")
+dim(c)
+c1<- na.omit(c)
+dim(c1)
+head(c1)
+summary(c1)
+min(c1$Income)
+max(c1$Income)
+cut_income<- cut(c1$Income,breaks = c(10000,30000,50000,90000),labels = c("low","middle","high"))
+table(c1$Gender,cut_income)
+c1<- data.frame(c1,cut_income)
+c1
+head(c1)
+c2<-filter(c1,c1$Gender=="M" & c1$Income>10000)
+c2$City
+table(c2$City)
+revenue= c1$Quantity*c1$Price
+c1<-data.frame(c1,revenue)
+head(c1)
+min(c1$revenue)
+max(c1$revenue)
+cut_revenue= cut(c1$revenue,breaks = c(20000,300000,500000,1000000),labels = c("low","modrate","high"))
+table(c1$City,cut_revenue)
+c1<-data.frame(c1,cut_revenue)
+head(c1) 
+#dicing
+table(c1$Gender,c1$cut_income)
+#slicing
+table(c1$Gender)
+head(c1)
+male<-filter(c1,c1$Gender=="M")
+(sd(male$revenue)/mean(male$revenue))*100
+female<-filter(c1,c1$Gender=="F")
+(sd(female$revenue)/mean(female$revenue))*100
+quantile(c1$Income)
+
+iqr<-69227-26525
+iqr<-iqr*1.5
+iqr
+boxplot(c1$Income)
+boxplot(c1$revenue)
