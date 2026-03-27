@@ -1,2 +1,2 @@
 # Projects
-Machine Learning, Power BI, Hypothesis Projects
+EDA, Power BI, Machine Learning Projects
